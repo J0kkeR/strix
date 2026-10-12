@@ -1,7 +1,14 @@
 import os
+import sys
 from types import SimpleNamespace
 
+import pytest
+
 from strix.runtime import session_manager
+
+pytestmark = pytest.mark.skipif(
+    sys.platform != "linux", reason="sandbox uid mapping is Linux-only"
+)
 
 
 def _as(monkeypatch, uid: int, gid: int) -> None:
